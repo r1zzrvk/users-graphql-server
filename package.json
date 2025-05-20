@@ -1,0 +1,53 @@
+{
+  "name": "users-graphql-server",
+  "version": "1.0.0",
+  "description": "GraphQL server for managing users",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "start": "node -r module-alias/register dist/index.js",
+    "lint": "eslint . --ext .ts --fix"
+  },
+  "author": {
+    "name": "r1zzrvk"
+  },
+  "license": "ISC",
+  "_moduleAliases": {
+    "@models": "dist/models",
+    "@schema": "dist/schema",
+    "@gqltypes": "dist/types",
+    "@validators": "dist/validators",
+    "@errors": "dist/errors",
+    "@utils": "dist/utils",
+    "@plugins": "dist/plugins",
+    "@services": "dist/services"
+  },
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "dotenv": "^16.5.0",
+    "graphql": "^16.11.0",
+    "module-alias": "^2.2.3",
+    "mongodb": "^6.16.0",
+    "mongoose": "^8.15.0",
+    "pino": "^9.7.0",
+    "zod": "^3.25.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.19",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
+    "eslint": "^9.27.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.4.0",
+    "nodemon": "^3.1.10",
+    "pino-pretty": "^13.0.0",
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.1"
+  }
+}
