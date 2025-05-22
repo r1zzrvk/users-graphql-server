@@ -1,6 +1,7 @@
 import { NotFoundError, ValidationError } from '@errors/index'
 import {
   CreateUserArgs,
+  DeleteManyArgs,
   DeleteUserArgs,
   UpdateUserArgs,
   UserArgs,
@@ -33,7 +34,12 @@ export const userService = {
     try {
       const query = filter?.search ? { name: new RegExp(filter.search, 'i') } : {}
 
-      return await User.find(query).skip(skip).limit(limit)
+      const [users, totalCount] = await Promise.all([
+        User.find(query).skip(skip).limit(limit),
+        User.countDocuments(query),
+      ])
+
+      return { users, totalCount }
     } catch (err) {
       throw new Error('Failed to fetch users')
     }
@@ -87,6 +93,26 @@ export const userService = {
       return deleted
     } catch (err) {
       throw new Error('Failed to delete user')
+    }
+  },
+
+  async deleteMany({ ids }: DeleteManyArgs) {
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+      throw new ValidationError('List of user IDs is required')
+    }
+
+    try {
+      const users = await User.find({ _id: { $in: ids } })
+
+      if (users.length === 0) {
+        throw new NotFoundError('No users found for the provided IDs')
+      }
+
+      await User.deleteMany({ _id: { $in: ids } })
+
+      return users
+    } catch (err) {
+      throw new Error('Failed to delete users')
     }
   },
 }

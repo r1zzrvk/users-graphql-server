@@ -28,3 +28,7 @@ export interface UpdateUserArgs {
 export interface DeleteUserArgs {
   id: string
 }
+
+export interface DeleteManyArgs {
+  ids: string[]
+}

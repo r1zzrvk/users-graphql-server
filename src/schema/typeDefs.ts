@@ -5,7 +5,7 @@ const typeDefs = gql`
 
   type Query {
     user(id: ID!): User!
-    users(skip: Int = 0, limit: Int = 10, filter: UsersFilterInput): [User]
+    users(skip: Int = 0, limit: Int = 10, filter: UsersFilterInput): UsersResult!
   }
 
   input UsersFilterInput {
@@ -16,6 +16,7 @@ const typeDefs = gql`
     createUser(input: CreateUserInput!): User!
     updateUser(id: ID!, input: UpdateUserInput!): User!
     deleteUser(id: ID!): User!
+    deleteUsers(ids: [ID!]!): [User!]!
   }
 
   type User {
@@ -32,6 +33,11 @@ const typeDefs = gql`
   input UpdateUserInput {
     email: Email
     name: String
+  }
+
+  type UsersResult {
+    users: [User!]!
+    totalCount: Int!
   }
 `
 

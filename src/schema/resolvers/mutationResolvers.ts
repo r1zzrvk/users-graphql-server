@@ -1,4 +1,9 @@
-import { CreateUserArgs, DeleteUserArgs, UpdateUserArgs } from '@gqltypes/graphqlTypes'
+import {
+  CreateUserArgs,
+  DeleteManyArgs,
+  DeleteUserArgs,
+  UpdateUserArgs,
+} from '@gqltypes/graphqlTypes'
 import { userService } from '@services/userService'
 
 export const mutationResolvers = {
@@ -12,5 +17,9 @@ export const mutationResolvers = {
 
   deleteUser: async (_: unknown, args: DeleteUserArgs) => {
     return userService.delete(args)
+  },
+
+  deleteUsers: async (_: unknown, args: DeleteManyArgs) => {
+    return await userService.deleteMany(args)
   },
 }
