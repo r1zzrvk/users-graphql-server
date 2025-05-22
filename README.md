@@ -69,6 +69,8 @@ npm install
 
 ### Development:
 
+For generating test users, use the script located at the root of the project: `users-script` — it can be run via the Mongo shell.
+
 ```bash
 npm run dev
 ```

@@ -15,7 +15,7 @@ module.exports = tseslint.config({
     import: eslintPluginImport,
     prettier: eslintPluginPrettier,
   },
-  ignores: ['node_modules', 'dist', 'eslint.config.js'],
+  ignores: ['node_modules', 'dist', 'eslint.config.js', 'users-script.js'],
   rules: {
     'prettier/prettier': [
       'error',
